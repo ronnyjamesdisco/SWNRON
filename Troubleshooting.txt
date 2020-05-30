@@ -1,0 +1,30 @@
+Toolchain:
+https://github.com/4ms/4ms-dev-env
+
+##########################################
+to build an audio file for the bootloader:
+
+make wav
+
+python module numpy required!
+
+file main.wav in the build/ directory
+
+
+Troubleshooting: If you have trouble getting python to create a wav file, such as this error:
+
+ImportError: No module named stm_audio_bootloader
+Then try this command:
+
+export PYTHONPATH=$PYTHONPATH:'.'
+
+#############################################
+wavecalc tool doesn´t compile:
+
+	main.c
+		remove malloc.h dependency 
+		include <stdint.h>
+
+	makefile
+		$(CC) $(OBJECTS) -lm -o $(APPNAME)
+#############################################
