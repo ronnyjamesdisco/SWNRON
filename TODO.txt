@@ -1,0 +1,42 @@
+// ##################################################################
+// CHORD Tables:
+
+<params_update.c>
+
+const int8_t 		CHORD_LIST[NUM_CHORDS][NUM_CHANNELS] =
+
+[TABLES]
+
+-> find better chords
+-> figure out CV input scaling for more playable option
+
+include <parameters_update.h>
+
+// ###################################################################
+// stock spheres:
+<spheres_internal.h>
+
+-> include "better ones"
+-> figure how to flash them once
+-> maybe check out  python/matplotlib 
+
+// ###################################################################
+// LFO wavetables
+
+-> include "better ones", snappier exponential & usable complex, consider fake S&H
+
+
+Reference:
+https://www.muffwiggler.com/forum/viewtopic.php?f=16&t=180737&start=475
+Those shapes were done with SphereEdit then exported as single waves ("Save waves to folder"), you might want to check the "cycle" tickbox when rendering the waves. You'll need to populate the folder with 27 waves to work with wavecalc, even if some of them are just empty.
+
+Then open a console, go to wavecal directory and type :
+CODE: SELECT ALL
+
+./wavecalc "/path/to/your/waves/" "." "yourname" "LFO"
+In the same directory you should now have a LFO_LFO.h file.
+
+This file contains your waves represented by series of numbers in a "const uint8_t lfo_wavetable[NUM_LFO_SHAPES][LFO_TABLELEN] =" statement. Those consisting of only the number "126" are the empty ones, so you can safely discard them.
+Next, you'll see that all of those series begin with a "0", you'll need to correct that by interpolating with the last number of the serie, i.e: {0, 120,...//...,180} should be something like {150,120,...//...,180} ... Dunno if that is clear :hmm:
+Those waves can then be imported into src/lfo_wavetable_bank.c, you'll need to modify LFOS_TO_BANK_END[NUM_LFO_GROUPS] accordingly. Next you'll need to change the NUM_LFO_GROUPS variable in inc/lfo_wavetable_bank.h to reflect how many banks you now have.
+Please see https://github.com/tsointsoin/SWN/blob/ ... ble_bank.c and https://github.com/tsointsoin/SWN/blob/ ... ble_bank.h and compare with the original 4MS repository.
