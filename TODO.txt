@@ -13,17 +13,20 @@ const int8_t 		CHORD_LIST[NUM_CHORDS][NUM_CHANNELS] =
 include <parameters_update.h>
 
 // ###################################################################
-// stock spheres:
-<spheres_internal.h>
+// stock spheres: <spheres_internal.h>
 
--> include "better ones"
+-> include own wavetables // 12x in total	
 -> figure how to flash them once
+		check about: #ifdef SKIP_FACTORY_SPHERES_IN_HEXFILE
 -> maybe check out  python/matplotlib 
 
 // ###################################################################
 // LFO wavetables
 
--> include "better ones", snappier exponential & usable complex, consider fake S&H
+-> create and include "better ones"
+		snappier exponential 
+		usable complex
+		consider fake S&H
 
 
 Reference:
