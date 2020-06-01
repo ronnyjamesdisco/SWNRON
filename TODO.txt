@@ -18,6 +18,7 @@ include <parameters_update.h>
 -> include own wavetables // 12x in total	
 -> figure how to flash them once
 		check about: #ifdef SKIP_FACTORY_SPHERES_IN_HEXFILE
+-> consider changing the colour scheme to indicate stock spheres have been changed
 -> maybe check out  python/matplotlib 
 
 // ###################################################################
