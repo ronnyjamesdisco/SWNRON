@@ -37,18 +37,18 @@
 	#include "spheres_ron/u20.h" // glass orchestra
 
 	const void *wavetable_list[] = {
-		(void *)u1.h, 
-		(void *)u2.h,
-		(void *)u3.h,
-		(void *)u9.h,
-		(void *)u10.h,
-		(void *)u11.h,
-		(void *)u12.h,
-		(void *)u13.h,
-		(void *)u16.h,
-		(void *)u17.h,
-		(void *)u18.h,
-		(void *)u20.h,
+		(void *)u1, 
+		(void *)u2,
+		(void *)u3,
+		(void *)u9,
+		(void *)u10,
+		(void *)u11,
+		(void *)u12,
+		(void *)u13,
+		(void *)u16,
+		(void *)u17,
+		(void *)u18,
+		(void *)u20,
 //
 //
 //		(void *)wavetable_SWN_D,
