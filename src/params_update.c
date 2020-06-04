@@ -25,9 +25,9 @@
  *
  * -----------------------------------------------------------------------------
  *
- Changes: Ron ronnyjamesdisco@googlemail.com
- started messing with chord spread, still to be sorted out
- /
+ * Changes: Ron ronnyjamesdisco@googlemail.com
+ * started messing with chord spread, still to be sorted out
+ */
 
 
 #include "params_update.h"
