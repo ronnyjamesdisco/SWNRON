@@ -1,4 +1,13 @@
 // ##################################################################
+// init + verify
+
+1. compile stock FW & flash (verify toolchain)
+2. compile /w LFO tables & flash (verify something´s different) 
+3. compile /w minor changes eg chord tables & flash (test & verify)
+4. compile "large" hex /w OSC tables & flash (test + verify, keep as RC) 
+5. compile "small" hex /w OSC tables & flash (test + verify, keep as RC)
+
+// ##################################################################
 // CHORD Tables:
 
 <params_update.c>
@@ -16,9 +25,19 @@ include <parameters_update.h>
 // stock spheres: <spheres_internal.h>
 
 -> include own wavetables // 12x in total	
--> figure how to flash them once
-		check about: #ifdef SKIP_FACTORY_SPHERES_IN_HEXFILE
--> consider changing the colour scheme to indicate stock spheres have been changed
+		
+-> how to flash them once
+	1. compile "large" hex /w spheres
+	2. flash hex, reboot, wait 20-30s
+	3. pass hardware test mode
+	4. compile "small" hex /wo spheres
+	5. reflash "small" hex (don´t erase flash!)
+		in <globals.h>: 
+		// #define FORCE_WRITE_FACTORY_SPHERES 	// <-- Uncomment this to force re-loading of wavetables from const arrays, boot time will increase
+		// #define CLEAR_USER_SPHERES_FROM_FLASH 	// <-- Uncomment this to erase user spheres from flash
+#define SKIP_FACTORY_SPHERES_IN_HEXFILE  // <-- Uncomment this to create a smaller ELF/HEX/BIN file, by not including the factory spheres (you must have them already loaded, of course)
+		// #define ERASE_ALL_WAVETABLES
+						
 -> maybe check out  python/matplotlib 
 
 // ###################################################################
@@ -28,6 +47,16 @@ include <parameters_update.h>
 		snappier exponential 
 		usable complex
 		consider fake S&H
+
+	<lfo_wavetable_bank.c>
+		uint8_t LFOS_TO_BANK_END[NUM_LFO_GROUPS] = {5, 10, 12, 13, 19, 25}; 
+		0-5 ramps, 6-10 rev-ramps, 11-12 sine+tri, 13 DC, 14-19 cplx1, 20-25 cplx2
+	
+	add whole bank of exponential ramps 1-5
+	renumber ramps, rev-ramps, sine+tri
+	add: square, noise
+	renumber cplx1, or add new ones
+	
 
 
 Reference:
