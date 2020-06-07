@@ -40,6 +40,8 @@ include <parameters_update.h>
 						
 -> maybe check out  python/matplotlib 
 
+-> increase total number of factory spheres: adjust in <sphere.h>
+
 // ###################################################################
 // LFO wavetables
 
