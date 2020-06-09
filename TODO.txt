@@ -1,13 +1,4 @@
 // ##################################################################
-// init + verify
-
-1. compile stock FW & flash (verify toolchain)
-2. compile /w LFO tables & flash (verify something´s different) 
-3. compile /w minor changes eg chord tables & flash (test & verify)
-4. compile "large" hex /w OSC tables & flash (test + verify, keep as RC) 
-5. compile "small" hex /w OSC tables & flash (test + verify, keep as RC)
-
-// ##################################################################
 // CHORD Tables:
 
 <params_update.c>
@@ -18,10 +9,37 @@ const int8_t 		CHORD_LIST[NUM_CHORDS][NUM_CHANNELS] =
 
 -> find better chords
 -> figure out CV input scaling for more playable option
+-> invent harmonizer mode
 
 include <parameters_update.h>
 
 // ###################################################################
+// stock spheres: <spheres_internal.h>
+						
+-> maybe check out  python/matplotlib 
+
+-> increase total number of factory spheres: adjust in <sphere.h>
+
+// *******************************************************************
+// *******************************************************************
+// ****    *******    *****   ***  ****    ***************************
+// ****  **  ****  **  ****  * **  ****    ***************************
+// ****  **  ****  **  ****  ** *  ****   ****************************
+// ****    *******    *****   **   ****     **************************
+// *******************************************************************
+// 
+
+
+// ********************************************************************
+// init + verify
+
+1. compile stock FW & flash (verify toolchain)
+2. compile /w LFO tables & flash (verify something´s different) 
+3. compile /w minor changes eg chord tables & flash (test & verify)
+4. compile "large" hex /w OSC tables & flash (test + verify, keep as RC) 
+5. compile "small" hex /w OSC tables & flash (test + verify, keep as RC)
+
+// ********************************************************************
 // stock spheres: <spheres_internal.h>
 
 -> include own wavetables // 12x in total	
@@ -37,12 +55,9 @@ include <parameters_update.h>
 		// #define CLEAR_USER_SPHERES_FROM_FLASH 	// <-- Uncomment this to erase user spheres from flash
 #define SKIP_FACTORY_SPHERES_IN_HEXFILE  // <-- Uncomment this to create a smaller ELF/HEX/BIN file, by not including the factory spheres (you must have them already loaded, of course)
 		// #define ERASE_ALL_WAVETABLES
-						
--> maybe check out  python/matplotlib 
 
--> increase total number of factory spheres: adjust in <sphere.h>
 
-// ###################################################################
+// ********************************************************************
 // LFO wavetables
 
 -> create and include "better ones"
