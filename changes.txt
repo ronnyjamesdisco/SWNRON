@@ -1,4 +1,7 @@
-07.06.20	LFO wavetables
+20200609	LFO wavetables
+			<led_cont.c> bank color tables extended
+
+20200607	LFO wavetables
 			<lfo_wavetable_bank.c>:
 				- ENV shapes added
 				- SAW 1/8 added
@@ -13,7 +16,7 @@
 			<lfo_wavetable_bank.h> 
 				- define NUM_LFO_SHAPES NUM_LFO_GROUPS
 
-04.06.20	started messing around
+20200604	started messing around
 			- own OSC WT spheres 1-12
 			- own LFO WT 
 			- spread scheme 2-5
