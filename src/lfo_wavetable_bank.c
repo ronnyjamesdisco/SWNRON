@@ -13,6 +13,8 @@
 // 21-25 Standard shapes 4ms stock + Ron
 // 26 DC Offset 4ms stock
 // 27-30 Sine wobbles & glitch Ron
+//
+// adjust bank color tables in <led_cont.c>
 
 #include "arm_math.h" 
 #include "lfo_wavetable_bank.h"
