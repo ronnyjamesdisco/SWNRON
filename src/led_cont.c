@@ -107,7 +107,7 @@ const uint16_t CH_COLOR_MAP[6][3] = {
 	{ 800 	, 1	 	, 50	}	
 };
 
-const uint16_t LFO_BANK_COLOR[25][3]= {
+const uint16_t LFO_BANK_COLOR[30][3]= {
 	// Bank 1 	 1-5
 	{ 1		, 600	, 954	},				// Shades of Blue
 	{ 1		, 318	, 947	},				// Blue 2
