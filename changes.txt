@@ -19,5 +19,5 @@
 20200604	started messing around
 			- own OSC WT spheres 1-12
 			- own LFO WT 
-			- spread scheme 2-5
+			- spread scheme 2-5 <params_update.c>
 			compile, flash + test
