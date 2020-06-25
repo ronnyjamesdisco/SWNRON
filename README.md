@@ -1,3 +1,18 @@
+# Modding the 4ms Spherical Wavetable Navigator firmware
+
+changes:
+- factory wavetable spheres (custom WT replacing the stock spheres)
+- LFO shapes (incl. custom shapes / stock complex waveforms abandoned)
+
+Todo:
+- Harmonizer mode
+- Arpeggiator mode
+- extend factory spheres
+- finetune LFO shapes
+- create packages for 1) WT-flash/FW combo 2) standalone FW 
+
+# Readme from 4ms Company following below
+
 # Spherical Wavetable Navigator
 
 Firmware for the Spherical Wavetable Navigator, a Eurorack-format module from 4ms Company.
