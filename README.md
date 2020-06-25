@@ -1,10 +1,10 @@
 # Modding the 4ms Spherical Wavetable Navigator firmware
-
-changes:
+https://ronnyjamesdisco.github.io/SWNRON/
+##Changes:
 - factory wavetable spheres (custom WT replacing the stock spheres)
 - LFO shapes (incl. custom shapes / stock complex waveforms abandoned)
 
-Todo:
+##Todo:
 - Harmonizer mode
 - Arpeggiator mode
 - extend factory spheres
