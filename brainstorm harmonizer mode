@@ -12,17 +12,32 @@
 * - CHORD_CV -> gate
 * - TBS: chord spread encoder -> choose from different harmonizer scales (minor, major, guitar, jazzy, ..) 
 * 
-* steal most parts from existing CV/Gate mode [KEYS_EXT_TRIG]
-*
-* for reference: current key modes referred by the manual: 
-* Mute Mode: ksw_MUTE 
-* Note Mode: ksw_NOTE
-* Keyboard Mode: ksw_KEYS 
-* CV/Gate Mode: ksw_KEYS_EXT_TRIG
-*
-*/
+* */ 
 
-{/* <params_update.h> */
+{/* steal some parts from existing CV/Gate mode [KEYS_EXT_TRIG] 
+*/
+{ // clone Chord CV jack for gate in <params_update.c>  
+ uint8_t chans_in_ext_trig_mode=0; // eg chans_in_harmonizer_node 
+}; 
+{ //Transpose CV jack must be patched for gate to work on Chord CV 
+	if (chans_in_ext_trig_mode && analog_jack_plugged(TRANSPOSE_CV))
+	{
+		if (trig_level[6] && !last_trig_level[6])
+		{
+			for (chan=0; chan<NUM_CHANNELS; chan++)
+			{
+				lfos.cycle_pos[chan] = 0;
+				params.note_on[chan] = 1;
+				params.new_key[chan] = 1;
+				new_key_armed[chan]	 = 0;
+			}
+		}
+	}
+	last_trig_level[6] = trig_level[6];
+	};
+};
+
+{/* Key Modes <params_update.h> */
 	enum MuteNoteKeyStates {
 		ksw_MUTE,
 		ksw_NOTE,
@@ -48,3 +63,17 @@
 		// find out what to do here, sclm_NONE or MAJOR/MÍNOR etc
 	
  };	
+ 
+ 
+/* for reference: current key modes referred by the manual: 
+* Mute Mode: ksw_MUTE 				** default mode, Channel buttons mute/unmute, LFOs run continuously 
+* Note Mode: ksw_NOTE 				** continuous CV sources [eg LFOs], LFOs fire when channel´s note changes
+* Keyboard Mode: ksw_KEYS 			** LFO/envelopes fire AD (trigger) with Channel buttons, 1V/oct latched
+* CV/Gate Mode: ksw_KEYS_EXT_TRIG 	** 7x CV/gate inputs (6x Channel +1x Master), LFO/envelopes AD (trigger) SCALE is off/unquantized
+*/
+
+/* for reference: various transpose structures:
+*/ 
+int32_t 	transpose		[NUM_CHANNELS]		;	// Combination of transpose encoder + chord
+float 		transposition 	[NUM_CHANNELS]		;	// Calcuated pitch change based on transpose amount
+float 		voct 			[NUM_CHANNELS]		;	// CV input
