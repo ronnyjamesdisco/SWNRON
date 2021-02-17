@@ -2,7 +2,12 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/malloc.h>
+// The <malloc.h> header is deprecated. Use <stdlib.h> instead  
+// #include <sys/malloc.h>
+//
+// adding <stdint.h> 
+#include <stdint.h>
+//
 #include <errno.h>
 #include <ctype.h>
 #include <sys/types.h>

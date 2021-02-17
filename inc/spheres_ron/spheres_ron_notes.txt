@@ -1,0 +1,40 @@
+MY USER SPHERES
+
+sph	cv	slt	name
+============================	
+u1 	c1	*11	warm pad 1 
+u2	d1	*5	warm pad 2
+u3	e1	*10	glass aluminium
+u4	f#1		glass needles
+u5	g#1		holy 
+u6	a#1		hollow 
+u7 	c2		mid pipes 
+u8	d2		hi pipes
+u9 	e2	*9	rich pipes
+u10 f2	*1	soft pipes 
+u11 g2	*2	dream pipes
+u12	a2	*3	harp organ
+u13 c3	*4	big city chords 	
+u14	c#3		warm organ
+u15	d#3		shanty organ
+u16	f3	*6	dub organ
+u17	f#3	*12	hollow dub
+u18	g#3	*7	bright dub
+u19	a#3		broken chords
+u20	c4	*8	glass orchestra
+
+trigger order:
+f2	g2	a2	c3	d1	f3	g#3	c4	e2	e1	c1	f#3
+
+#include "spheres_ron/u1.h
+#include "spheres_ron/u2.h
+#include "spheres_ron/u3.h
+#include "spheres_ron/u9.h
+#include "spheres_ron/u10.h
+#include "spheres_ron/u11.h
+#include "spheres_ron/u12.h
+#include "spheres_ron/u13.h
+#include "spheres_ron/u16.h
+#include "spheres_ron/u17.h
+#include "spheres_ron/u18.h
+#include "spheres_ron/u20.h

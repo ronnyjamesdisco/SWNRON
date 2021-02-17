@@ -1,0 +1,92 @@
+// ##################################################################
+// CHORD Tables:
+
+<params_update.c>
+
+const int8_t 		CHORD_LIST[NUM_CHORDS][NUM_CHANNELS] =
+
+[TABLES]
+
+-> find better chords
+-> figure out CV input scaling for more playable option
+-> invent harmonizer mode
+
+include <parameters_update.h>
+
+// ###################################################################
+// stock spheres: <spheres_internal.h>
+						
+-> maybe check out  python/matplotlib 
+
+-> increase total number of factory spheres: adjust in <sphere.h>
+
+// *******************************************************************
+// *******************************************************************
+// ****    *******    *****   ***  ****    ***************************
+// ****  **  ****  **  ****  * **  ****    ***************************
+// ****  **  ****  **  ****  ** *  ****   ****************************
+// ****    *******    *****   **   ****     **************************
+// *******************************************************************
+// 
+
+
+// ********************************************************************
+// init + verify
+
+1. compile stock FW & flash (verify toolchain)
+2. compile /w LFO tables & flash (verify something´s different) 
+3. compile /w minor changes eg chord tables & flash (test & verify)
+4. compile "large" hex /w OSC tables & flash (test + verify, keep as RC) 
+5. compile "small" hex /w OSC tables & flash (test + verify, keep as RC)
+
+// ********************************************************************
+// stock spheres: <spheres_internal.h>
+
+-> include own wavetables // 12x in total	
+		
+-> how to flash them once
+	1. compile "large" hex /w spheres
+	2. flash hex, reboot, wait 20-30s
+	3. pass hardware test mode
+	4. compile "small" hex /wo spheres
+	5. reflash "small" hex (don´t erase flash!)
+		in <globals.h>: 
+		// #define FORCE_WRITE_FACTORY_SPHERES 	// <-- Uncomment this to force re-loading of wavetables from const arrays, boot time will increase
+		// #define CLEAR_USER_SPHERES_FROM_FLASH 	// <-- Uncomment this to erase user spheres from flash
+#define SKIP_FACTORY_SPHERES_IN_HEXFILE  // <-- Uncomment this to create a smaller ELF/HEX/BIN file, by not including the factory spheres (you must have them already loaded, of course)
+		// #define ERASE_ALL_WAVETABLES
+
+
+// ********************************************************************
+// LFO wavetables
+
+-> create and include "better ones"
+		snappier exponential 
+		usable complex
+		consider fake S&H
+
+	<lfo_wavetable_bank.c>
+		uint8_t LFOS_TO_BANK_END[NUM_LFO_GROUPS] = {5, 10, 12, 13, 19, 25}; 
+		0-5 ramps, 6-10 rev-ramps, 11-12 sine+tri, 13 DC, 14-19 cplx1, 20-25 cplx2
+	
+	add whole bank of exponential ramps 1-5
+	renumber ramps, rev-ramps, sine+tri
+	add: square, noise
+	renumber cplx1, or add new ones
+	
+
+
+Reference:
+https://www.muffwiggler.com/forum/viewtopic.php?f=16&t=180737&start=475
+Those shapes were done with SphereEdit then exported as single waves ("Save waves to folder"), you might want to check the "cycle" tickbox when rendering the waves. You'll need to populate the folder with 27 waves to work with wavecalc, even if some of them are just empty.
+
+Then open a console, go to wavecal directory and type :
+CODE: SELECT ALL
+
+./wavecalc "/path/to/your/waves/" "." "yourname" "LFO"
+In the same directory you should now have a LFO_LFO.h file.
+
+This file contains your waves represented by series of numbers in a "const uint8_t lfo_wavetable[NUM_LFO_SHAPES][LFO_TABLELEN] =" statement. Those consisting of only the number "126" are the empty ones, so you can safely discard them.
+Next, you'll see that all of those series begin with a "0", you'll need to correct that by interpolating with the last number of the serie, i.e: {0, 120,...//...,180} should be something like {150,120,...//...,180} ... Dunno if that is clear :hmm:
+Those waves can then be imported into src/lfo_wavetable_bank.c, you'll need to modify LFOS_TO_BANK_END[NUM_LFO_GROUPS] accordingly. Next you'll need to change the NUM_LFO_GROUPS variable in inc/lfo_wavetable_bank.h to reflect how many banks you now have.
+Please see https://github.com/tsointsoin/SWN/blob/ ... ble_bank.c and https://github.com/tsointsoin/SWN/blob/ ... ble_bank.h and compare with the original 4MS repository.

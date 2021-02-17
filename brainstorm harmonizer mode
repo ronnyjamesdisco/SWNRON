@@ -1,0 +1,79 @@
+/* if messing with existing chord spread
+<params_update.h> 
+#define NUM_CHORDS			26
+
+-> should be increased for full harmonizing
+*/ 
+
+/* Q: Should we add a new "harmonizer" key mode rather than messing around with the chord spread? 
+*
+* control structure for harmonizer key mode could go like: 
+* - TRANSPOSE_CV -> channels 2-6 params_update through harmonizer tables (CV octaves =inversions)
+* - CHORD_CV -> gate
+* - TBS: chord spread encoder -> choose from different harmonizer scales (minor, major, guitar, jazzy, ..) 
+* 
+* */ 
+
+{/* steal some parts from existing CV/Gate mode [KEYS_EXT_TRIG] 
+*/
+{ // clone Chord CV jack for gate in <params_update.c>  
+ uint8_t chans_in_ext_trig_mode=0; // eg chans_in_harmonizer_node 
+}; 
+{ //Transpose CV jack must be patched for gate to work on Chord CV 
+	if (chans_in_ext_trig_mode && analog_jack_plugged(TRANSPOSE_CV))
+	{
+		if (trig_level[6] && !last_trig_level[6])
+		{
+			for (chan=0; chan<NUM_CHANNELS; chan++)
+			{
+				lfos.cycle_pos[chan] = 0;
+				params.note_on[chan] = 1;
+				params.new_key[chan] = 1;
+				new_key_armed[chan]	 = 0;
+			}
+		}
+	}
+	last_trig_level[6] = trig_level[6];
+	};
+};
+
+{/* Key Modes <params_update.h> */
+	enum MuteNoteKeyStates {
+		ksw_MUTE,
+		ksw_NOTE,
+		ksw_KEYS,
+		ksw_KEYS_EXT_TRIG,
+		
+		NUM_MUTE_NOTE_KEY_STATES
+	};
+};
+
+{ /* <led_cont.c> LED colors for key modes */
+	key_sw_mode_colors[ksw_MUTE] = ledc_WHITE;
+	key_sw_mode_colors[ksw_NOTE] = ledc_PINK;
+	key_sw_mode_colors[ksw_KEYS] = ledc_PURPLE;
+	key_sw_mode_colors[ksw_KEYS_EXT_TRIG] = ledc_GOLD;
+};	
+
+{ /* <params_update.c> add harmonizer to apply_keymode 
+*/
+ void apply_keymode(uint8_t chan, enum MuteNoteKeyStates new_keymode)
+ 
+	else if (new_keymode == ksw_HARMONIZER) 
+		// find out what to do here, sclm_NONE or MAJOR/MÍNOR etc
+	
+ };	
+ 
+ 
+/* for reference: current key modes referred by the manual: 
+* Mute Mode: ksw_MUTE 				** default mode, Channel buttons mute/unmute, LFOs run continuously 
+* Note Mode: ksw_NOTE 				** continuous CV sources [eg LFOs], LFOs fire when channel´s note changes
+* Keyboard Mode: ksw_KEYS 			** LFO/envelopes fire AD (trigger) with Channel buttons, 1V/oct latched
+* CV/Gate Mode: ksw_KEYS_EXT_TRIG 	** 7x CV/gate inputs (6x Channel +1x Master), LFO/envelopes AD (trigger) SCALE is off/unquantized
+*/
+
+/* for reference: various transpose structures:
+*/ 
+int32_t 	transpose		[NUM_CHANNELS]		;	// Combination of transpose encoder + chord
+float 		transposition 	[NUM_CHANNELS]		;	// Calcuated pitch change based on transpose amount
+float 		voct 			[NUM_CHANNELS]		;	// CV input

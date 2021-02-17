@@ -25,7 +25,7 @@
  *
  * -----------------------------------------------------------------------------
  */
-
+// Ron ronnyjamesdisco@googlemail.com - working on including more than 12 factory spheres
 
 #pragma once
 #include <stm32f7xx.h>
@@ -42,8 +42,8 @@
 #define 	SPHERE_WAVEFORM_SIZE  			((WT_TABLELEN * BYTEDEPTH) + WT_NAME_MONITOR_CHARSIZE)		//1044
 
 
-#define 	NUM_FACTORY_SPHERES 			12
-#define 	NUM_USER_SPHERES_ALLOWED		108
+#define 	NUM_FACTORY_SPHERES 			12 // Dare to increase
+#define 	NUM_USER_SPHERES_ALLOWED		108 // FS + US = 120!
 #define 	MAX_TOTAL_SPHERES 				(NUM_FACTORY_SPHERES + NUM_USER_SPHERES_ALLOWED)
 
 typedef struct{

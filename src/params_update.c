@@ -24,6 +24,9 @@
  * See http://creativecommons.org/licenses/MIT/ for more information.
  *
  * -----------------------------------------------------------------------------
+ *
+ * Changes: Ron ronnyjamesdisco@googlemail.com
+ * started messing with chord spread, still to be sorted out
  */
 
 
@@ -95,9 +98,9 @@ const int8_t		CHORD_LIST[NUM_CHORDS][NUM_CHANNELS] =
 	{ 0 	, 0 	, 0 	, 0 	, 0 	, 0		}  , 	// NONE
 
 	// FIFTH
-	{ 0 	, 0 	, 7 	, 7 	, 0 	, 0		}  , 	// FIFTH
-	{ 0 	, 0 	, 7 	, 7 	, -5 	, -5	}  , 	// FIFTH w/ inversion
-	{ 0 	, 12	, 7	, 19	, -12	, -5	}  , 	// FIFTH w/ oct
+	{ 0  	, 0  	, 7  	, 7  	, 0  	, 0		}  ,  	// FIFTH
+	{ -5  	, -5  	, 7  	, 7  	, 0  	, 0	}  ,  	// FIFTH w/ inversion was: 0  	, 0  	, 7  	, 7  	, -5  	, -5
+	{ -12  	, -5 	, 7 	, 19	, 0 	, 12	}  ,  	// FIFTH w/ oct was: 0  	, 12 	, 7 	, 19	, -12 	, -5
 
 	// MAJOR
 	{ 0 	, 0 	, 4 	, 4 	, 7 	, 7		}  , 	// M3rd
